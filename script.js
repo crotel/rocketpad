@@ -7,13 +7,44 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".loader").setAttribute("loaded", "true");
 });
 async function generate() {
-  const promise = await fetch('https://api.com/values/1');
-const template = await promise.text();
+  var promise = await fetch("./template.ejs");
+  var template = await promise.text();
+  var promise = await fetch("./css/markdown.css");
+  var css = await promise.text();
+
   var quillhtml = window.quill.container.firstChild.innerHTML;
- var ejs = window.ejs
- 
- ejs.render(template,{})
-  const { cid } = await window.node.add("Hello world!");
+  var ejs = window.ejs;
+
+  var output = ejs.render(template, {
+    css: css,
+    html: quillhtml
+  });
+  output = minify(output, {
+    useShortDoctype: true,
+    removeComments: true,
+    collapseWhitespace: true,
+    minifyJS: true,
+    minifyCSS: true
+  });
+  const { cid } = await window.node.add(output);
+
+  navigator.clipboard.writeText(`https://gateway.ipfs.io/ipfs/${cid.string}`).then(
+            function() {
+              console.log("Copied!");
+              document.getElementById("copybtn").innerHTML =
+                "Copied to clipboard!";
+              setTimeout(function() {
+                document.getElementById("copybtn").innerHTML = "Copy Link";
+              }, 3000);
+            },
+            function() {
+              console.error("Failed to copy");
+              document.getElementById("copybtn").innerHTML = "Failed to copy!";
+              setTimeout(function() {
+                document.getElementById("copybtn").innerHTML = "Copy Link";
+              }, 3000);
+            }
+          );
 }
 
 function autosave() {
