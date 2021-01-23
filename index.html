@@ -39,6 +39,29 @@
     <link rel="stylesheet" href="./css/primer.css" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./lib/quill.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <script>
+      if (location.protocol === "http:" && location.hostname != "localhost") {
+        location.protocol === "https:";
+      }
+      if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker.register("./sw.js").then(
+      function(registration) {
+        // Registration was successful
+        console.log(
+          "ServiceWorker registration successful with scope: ",
+          registration.scope
+        );
+      },
+      function(err) {
+        // registration failed :(
+        console.log("ServiceWorker registration failed: ", err);
+      }
+    );
+  });
+}
+    </script>
   </head>
   <div class="loader"></div>
   <body onload="load();">
@@ -141,7 +164,10 @@
         new QuillMarkdown(quill);
         setInterval(function() {
           if (typeof Storage !== "undefined") {
-            localStorage.setItem("autoSave", JSON.stringify(quill.getContents()));
+            localStorage.setItem(
+              "autoSave",
+              JSON.stringify(quill.getContents())
+            );
           } else {
             console.error("Autosave not supported on this browser!");
           }

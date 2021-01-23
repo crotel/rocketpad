@@ -1,8 +1,8 @@
 {
-  "name": "P2Pdoc",
-  "short_name": "P2Pdoc",
-  "start_url": "/",
-  "description": "P2Pdoc allows you to create a document and then upload it to the distributed web!",
+  "name": "RocketPad",
+  "short_name": "RocketPad",
+  "start_url": "./",
+  "description": "Create mini essays/websites and publish them to the distributed web via IPFS",
   "icons": [
     {
       "src": "/img/android-chrome-192x192.png",
@@ -34,8 +34,8 @@
       "type": "image/vnd.microsoft.icon"
     }
   ],
-  "theme_color": "#222",
-  "background_color": "#222",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
   "display": "minimal-ui",
   "related_applications": []
 }
