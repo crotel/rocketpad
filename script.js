@@ -7,19 +7,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".loader").setAttribute("loaded", "true");
 });
 async function generate() {
-  var html = window.quill.container.firstChild.innerHTML;
+  const promise = await fetch('https://api.com/values/1');
+const template = await promise.text();
+  var quillhtml = window.quill.container.firstChild.innerHTML;
+ var ejs = window.ejs
+ 
+ ejs.render(template,{})
+  const { cid } = await window.node.add("Hello world!");
 }
 
 function autosave() {
   if (typeof Storage !== "undefined") {
-    localStorage.setItem("body", JSON.stringify(quill.getContents()));
+    setInterval(function() {
+      localStorage.setItem("body", JSON.stringify(quill.getContents()));
+    }, 3000);
   } else {
     console.error("Autosave not supported on this browser!");
   }
 }
 function load() {
   if (typeof Storage !== "undefined") {
-    quill.setContents(JSON.parse(localStorage.getItem("body")));
+    if (localStorage.getItem("body")) {
+      quill.setContents(JSON.parse(localStorage.getItem("body")));
+    }
   } else {
     console.error("Autosave not supported on this browser!");
   }
