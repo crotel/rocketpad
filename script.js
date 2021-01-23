@@ -14,7 +14,6 @@ async function generate() {
 
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
-
   var output = ejs.render(template, {
     css: css,
     html: quillhtml,
@@ -57,7 +56,11 @@ async function preview() {
   window.open(`https://gateway.ipfs.io/ipfs/${cid.string}`);
 }
 async function downloadHTML() {
-  download(await generate(), "dlText.txt", "text/plain");
+  window.download(
+    await generate(),
+    Math.floor(Date.now() / 1000) + ".html",
+    "text/html"
+  );
 }
 function autosave() {
   if (typeof Storage !== "undefined") {
