@@ -1189,6 +1189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector(".loader").setAttribute("loaded", "true");
 });
 async function generate() {
+  var startTime = new Date().valueOf();
   var promise = await fetch("./template.ejs");
   var template = await promise.text();
   var promise = await fetch("./css/markdown.css");
@@ -1210,7 +1211,8 @@ async function generate() {
     minifyJS: true,
     minifyCSS: true
   });
-  return output;
+  return `<!-- 🚀 Generated in ${( new Date().valueOf() - startTime) / 1000} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
+${output}`
 }
 async function copy() {
   const { cid } = await window.node.add(await generate());
