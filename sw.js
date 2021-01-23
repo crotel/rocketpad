@@ -1,7 +1,5 @@
 const staticCacheName = "writepad";
-const assets = [
- 
-];
+const assets = [];
 
 self.addEventListener("install", evt => {
   evt.waitUntil(
