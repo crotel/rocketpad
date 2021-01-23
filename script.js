@@ -1194,8 +1194,6 @@ async function generate() {
   var template = await promise.text();
   var promise = await fetch("./css/markdown.css");
   var css = await promise.text();
-  var promise = await fetch("./lib/darkmode.js");
-  var darkmodejs = await promise.text();
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
   var output = ejs.render(template, {
@@ -1204,7 +1202,6 @@ async function generate() {
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
     icon: document.querySelector("#emojipicker").value,
-    darkmodejs: darkmodejs
   });
   output = minify(output, {
     useShortDoctype: true,
