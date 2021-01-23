@@ -58,7 +58,7 @@ async function preview() {
 async function downloadHTML() {
   window.download(
     await generate(),
-    Math.floor(Date.now() / 1000) + ".html",
+    new Date().toISOString() + ".html",
     "text/html"
   );
 }
