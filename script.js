@@ -1201,7 +1201,7 @@ async function generate() {
     html: quillhtml,
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
-    icon: document.querySelector("#emojipicker").value,
+    icon: document.querySelector("#emojipicker").value
   });
   output = minify(output, {
     useShortDoctype: true,
@@ -1250,8 +1250,35 @@ async function downloadHTML() {
 
 function load() {
   if (typeof Storage !== "undefined") {
-    if (localStorage.getItem("body")) {
-      quill.setContents(JSON.parse(localStorage.getItem("body")));
+    if (localStorage.getItem("autoSave")) {
+      quill.setContents(JSON.parse(localStorage.getItem("autoSave")));
+    } else {
+      quill.setContents({
+        ops: [
+          { insert: "rocketpad" },
+          { attributes: { header: 1 }, insert: "\n" },
+          { insert: "This is " },
+          { attributes: { bold: true }, insert: "rocketpad" },
+          {
+            insert:
+              ", a webapp that allows you to create mini essays/websites and publish them to the distributed web via IPFS. It uses Quill.js as the editor due to its portability and its ability to work 100% offline. It saves your documents using IPFS. Here's a quick demo showing what you can use in your documents:\n\nQuotes"
+          },
+          { attributes: { blockquote: true }, insert: "\n" },
+          { insert: "headers" },
+          { attributes: { header: 2 }, insert: "\n" },
+          { attributes: { bold: true }, insert: "bold" },
+          { insert: " and " },
+          { attributes: { italic: true }, insert: "italicized" },
+          { insert: " text, maybe a bit of " },
+          { attributes: { strike: true }, insert: "strikethrough" },
+          { insert: "? What about " },
+          { attributes: { background: "#ffff00" }, insert: "highlighting" },
+          {
+            insert:
+              '?\n\nFun Fact: You can use markdown!\n\nWhen you are done with a document, make sure to click "Copy Link" to copy the link of your article.\n'
+          }
+        ]
+      });
     }
   } else {
     console.error("Autosave not supported on this browser!");

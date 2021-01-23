@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="./lib/quill.css" />
   </head>
   <div class="loader"></div>
-  <body onload="load();autosave();">
+  <body onload="load();">
     <header>
       <div class="Header">
         <div class="Header-item">
@@ -141,7 +141,7 @@
         new QuillMarkdown(quill);
         setInterval(function() {
           if (typeof Storage !== "undefined") {
-            localStorage.setItem("body", JSON.stringify(quill.getContents()));
+            localStorage.setItem("autoSave", JSON.stringify(quill.getContents()));
           } else {
             console.error("Autosave not supported on this browser!");
           }
