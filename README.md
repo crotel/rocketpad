@@ -21,9 +21,9 @@ ipfs pin add /ipns/rocketpad.aboutdavid.me
 This will give you the latest version of rocketpad. You will get an output that looks something like this:
 
 ```
-pinned QmP3kpJFWpFpq18LYLDSoXLs92TrE9DYLxWUxBcUYKJwfR recursively
+pinned QmUvxeH81GVxHP4yBmK6YCc3aNFAXC5i1yKZx5ibgHbHaB recursively
 ```
 
-Take that hash (the thing that looks like `QmP3kpJFWpFpq18LYLDSoXLs92TrE9DYLxWUxBcUYKJwfR`) and visit `http://localhost:8080/ipfs/[OUTPUT HASH]`
+Take that hash (the thing that looks like `QmUvxeH81GVxHP4yBmK6YCc3aNFAXC5i1yKZx5ibgHbHaB`) and visit `http://localhost:8080/ipfs/[OUTPUT HASH]`
 
 Now you can use RocketPad offline. Make sure to use the [IPFS Companion](https://chrome.google.com/webstore/detail/ipfs-companion/nibjojkomfdiaoajekhjakgkdhaomnch) chrome extension for the best experience!
