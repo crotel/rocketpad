@@ -14,10 +14,10 @@ main {
   opacity: 1;
 }
 .loader::after {
-  content: "🚀"
+  content: "🚀";
 }
 
-@-webkit-keyframes pulse{
+@-webkit-keyframes pulse {
   0% {
     opacity: 0;
   }
@@ -29,7 +29,41 @@ main {
   }
 }
 
-main,header {
+main,
+header {
   display: none;
-  text-align: center;
+}
+main[loaded="true"],
+header[loaded="true"] {
+  display: block;
+  position: relative;
+  -webkit-animation-name: loaded;
+  -webkit-animation-duration: 1s;
+  animation-name: loaded;
+  animation-duration: 1s;
+}
+.loader[loaded="true"] {
+  display: none;
+}
+
+@-webkit-keyframes loaded {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+
+@keyframes loaded {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
