@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./lib/quill.css" />
   </head>
-  <div class="loader">
- </div>
+  <div class="loader"></div>
   <body onload="load();autosave();">
     <header>
       <div class="Header">
         <div class="Header-item">
-          <a href="#" class="Header-link" id="copybtn" onclick="generate()">Copy Link</a>
+          <a href="#" class="Header-link" id="copybtn" onclick="generate()"
+            >Copy Link</a
+          >
         </div>
         <div class="Header-item">
           <a href="#" class="Header-link" id="previewbtn">Preview</a>
@@ -32,7 +33,15 @@
         class="form-control input-block"
         type="text"
         placeholder="Title"
+        id="title"
       /><br />
+      <textarea
+        class="form-control input-block"
+        id="description"
+        placeholder="Description"
+        style="resize:none;"
+      ></textarea
+      ><br />
       <div id="editor"></div>
     </main>
     <footer>
@@ -41,7 +50,7 @@
       <script src="./lib/darkmode.js"></script>
       <script src="./lib/quill.js"></script>
       <script src="./lib/quilljs-markdown.js"></script>
-       <script src="./lib/ejs.js"></script>
+      <script src="./lib/ejs.js"></script>
       <script src="./script.js"></script>
       <script>
         var quill = new Quill("#editor", {

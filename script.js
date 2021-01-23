@@ -17,7 +17,9 @@ async function generate() {
 
   var output = ejs.render(template, {
     css: css,
-    html: quillhtml
+    html: quillhtml,
+    title: document.querySelector("#title").value,
+    description: document.querySelector("#description").value
   });
   output = minify(output, {
     useShortDoctype: true,
@@ -28,23 +30,24 @@ async function generate() {
   });
   const { cid } = await window.node.add(output);
 
-  navigator.clipboard.writeText(`https://gateway.ipfs.io/ipfs/${cid.string}`).then(
-            function() {
-              console.log("Copied!");
-              document.getElementById("copybtn").innerHTML =
-                "Copied to clipboard!";
-              setTimeout(function() {
-                document.getElementById("copybtn").innerHTML = "Copy Link";
-              }, 3000);
-            },
-            function() {
-              console.error("Failed to copy");
-              document.getElementById("copybtn").innerHTML = "Failed to copy!";
-              setTimeout(function() {
-                document.getElementById("copybtn").innerHTML = "Copy Link";
-              }, 3000);
-            }
-          );
+  navigator.clipboard
+    .writeText(`https://gateway.ipfs.io/ipfs/${cid.string}`)
+    .then(
+      function() {
+        console.log("Copied!");
+        document.getElementById("copybtn").innerHTML = "Copied to clipboard!";
+        setTimeout(function() {
+          document.getElementById("copybtn").innerHTML = "Copy Link";
+        }, 3000);
+      },
+      function() {
+        console.error("Failed to copy");
+        document.getElementById("copybtn").innerHTML = "Failed to copy!";
+        setTimeout(function() {
+          document.getElementById("copybtn").innerHTML = "Copy Link";
+        }, 3000);
+      }
+    );
 }
 
 function autosave() {
