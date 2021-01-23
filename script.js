@@ -1194,7 +1194,8 @@ async function generate() {
   var template = await promise.text();
   var promise = await fetch("./css/markdown.css");
   var css = await promise.text();
-
+  var promise = await fetch("./lib/darkmode.js");
+  var darkmodejs = await promise.text();
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
   var output = ejs.render(template, {
@@ -1202,7 +1203,8 @@ async function generate() {
     html: quillhtml,
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
-    icon: document.querySelector("#emojipicker").value
+    icon: document.querySelector("#emojipicker").value,
+    darkmodejs: darkmodejs
   });
   output = minify(output, {
     useShortDoctype: true,
@@ -1211,8 +1213,9 @@ async function generate() {
     minifyJS: true,
     minifyCSS: true
   });
-  return `<!-- 🚀 Generated in ${( new Date().valueOf() - startTime) / 1000} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
-${output}`
+  return `<!-- 🚀 Generated in ${(new Date().valueOf() - startTime) /
+    1000} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
+${output}`;
 }
 async function copy() {
   const { cid } = await window.node.add(await generate());
