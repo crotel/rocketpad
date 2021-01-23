@@ -1247,15 +1247,7 @@ async function downloadHTML() {
     "text/html"
   );
 }
-function autosave() {
-  if (typeof Storage !== "undefined") {
-    setInterval(function() {
-      localStorage.setItem("body", JSON.stringify(quill.getContents()));
-    }, 3000);
-  } else {
-    console.error("Autosave not supported on this browser!");
-  }
-}
+
 function load() {
   if (typeof Storage !== "undefined") {
     if (localStorage.getItem("body")) {

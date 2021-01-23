@@ -82,7 +82,31 @@
         style="resize:none;"
       ></textarea
       ><br />
-      <div id="editor"></div>
+      <div id="editor">
+        <h1>rocketpad</h1>
+        <p>
+          This is <strong>rocketpad</strong>, a webapp that allows you to create
+          mini essays/websites and publish them to the distributed web via IPFS.
+          It uses Quill.js as the editor due to its portability and its ability
+          to work 100% offline. It saves your documents using IPFS. Here's a
+          quick demo showing what you can use in your documents:
+        </p>
+        <p><br /></p>
+        <blockquote>Quotes</blockquote>
+        <h2>headers</h2>
+        <p>
+          <strong>bold</strong> and <em>italicized</em> text, maybe a bit of
+          <s>strikethrough</s>? What about
+          <span style="background-color: rgb(255, 255, 0);">highlighting</span>?
+        </p>
+        <p><br /></p>
+        <p>Fun Fact: You can use markdown!</p>
+        <p><br /></p>
+        <p>
+          When you are done with a document, make sure to click "Copy Link" to
+          copy the link of your article.
+        </p>
+      </div>
     </main>
     <footer>
       <script src="./lib/download.js"></script>
@@ -115,6 +139,13 @@
           }
         });
         new QuillMarkdown(quill);
+        setInterval(function() {
+          if (typeof Storage !== "undefined") {
+            localStorage.setItem("body", JSON.stringify(quill.getContents()));
+          } else {
+            console.error("Autosave not supported on this browser!");
+          }
+        }, 3000);
       </script>
     </footer>
   </body>
