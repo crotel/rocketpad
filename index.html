@@ -16,12 +16,14 @@
     <header>
       <div class="Header">
         <div class="Header-item">
-          <a href="#" class="Header-link" id="copybtn" onclick="generate()"
+          <a href="#" class="Header-link" id="copybtn" onclick="copy()"
             >Copy Link</a
           >
         </div>
         <div class="Header-item">
-          <a href="#" class="Header-link" id="previewbtn">Preview</a>
+          <a href="#" class="Header-link" id="previewbtn" onclick="preview()"
+            >Preview</a
+          >
         </div>
         <div class="Header-item">
           <a href="#" class="Header-link" id="downloadbtn">Download</a>
@@ -45,6 +47,7 @@
       <div id="editor"></div>
     </main>
     <footer>
+      <script src="./lib/download.js"></script>
       <script src="./lib/ipfs.js"></script>
       <script src="./lib/htmlminifier.js"></script>
       <script src="./lib/darkmode.js"></script>
@@ -52,6 +55,7 @@
       <script src="./lib/quilljs-markdown.js"></script>
       <script src="./lib/ejs.js"></script>
       <script src="./script.js"></script>
+
       <script>
         var quill = new Quill("#editor", {
           theme: "snow",

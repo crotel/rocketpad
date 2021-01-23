@@ -28,8 +28,11 @@ async function generate() {
     minifyJS: true,
     minifyCSS: true
   });
-  const { cid } = await window.node.add(output);
-
+  return output;
+}
+async function copy() {
+  const { cid } = await window.node.add(await generate());
+  await window.node.pin.add(cid.string);
   navigator.clipboard
     .writeText(`https://gateway.ipfs.io/ipfs/${cid.string}`)
     .then(
@@ -49,7 +52,13 @@ async function generate() {
       }
     );
 }
-
+async function preview() {
+  const { cid } = await window.node.add(await generate());
+  window.open(`https://gateway.ipfs.io/ipfs/${cid.string}`);
+}
+async function downloadHTML() {
+  download(await generate(), "dlText.txt", "text/plain");
+}
 function autosave() {
   if (typeof Storage !== "undefined") {
     setInterval(function() {
