@@ -1198,7 +1198,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector("main").setAttribute("loaded", "true");
     document.querySelector(".loader").setAttribute("loaded", "true");
   }
-  window.history.replaceState({}, document.title, "/");
 });
 async function generate() {
   var startTime = new Date().valueOf();
@@ -1250,7 +1249,7 @@ async function copy() {
 }
 async function saveDraft() {
   const { cid } = await window.node.add(JSON.stringify(quill.getContents()));
-  navigator.clipboard.writeText(`${location.href}/#${cid.string}`).then(
+  navigator.clipboard.writeText(`${location.href}${cid.string}`).then(
     function() {
       console.log("Copied!");
       document.getElementById("savebtn").innerHTML = "Copied to clipboard!";
