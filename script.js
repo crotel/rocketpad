@@ -1184,9 +1184,20 @@ var emojis = [
 document.addEventListener("DOMContentLoaded", async () => {
   const node = await window.Ipfs.create({ repo: "ipfs-" + Math.random() });
   window.node = node;
-  document.querySelector("header").setAttribute("loaded", "true");
-  document.querySelector("main").setAttribute("loaded", "true");
-  document.querySelector(".loader").setAttribute("loaded", "true");
+
+  if (location.hash.substr(1) !== "" && location.hash.substr(1).length > 10) {
+    console.log("Loading hash", location.hash.substr(1));
+    for await (const data of node.cat(location.hash.substr(1))) {
+      quill.setContents(JSON.parse(data.toString()));
+      document.querySelector("header").setAttribute("loaded", "true");
+      document.querySelector("main").setAttribute("loaded", "true");
+      document.querySelector(".loader").setAttribute("loaded", "true");
+    }
+  } else {
+    document.querySelector("header").setAttribute("loaded", "true");
+    document.querySelector("main").setAttribute("loaded", "true");
+    document.querySelector(".loader").setAttribute("loaded", "true");
+  }
 });
 async function generate() {
   var startTime = new Date().valueOf();
@@ -1238,24 +1249,22 @@ async function copy() {
 }
 async function saveDraft() {
   const { cid } = await window.node.add(JSON.stringify(quill.getContents()));
-  navigator.clipboard
-    .writeText(`${location.origin}/#${cid.string}`)
-    .then(
-      function() {
-        console.log("Copied!");
-        document.getElementById("savebtn").innerHTML = "Copied to clipboard!";
-        setTimeout(function() {
-          document.getElementById("savebtn").innerHTML = "Save Draft";
-        }, 3000);
-      },
-      function() {
-        console.error("Failed to copy");
-        document.getElementById("savebtn").innerHTML = "Failed to copy!";
-        setTimeout(function() {
-          document.getElementById("savebtn").innerHTML = "Save Draft";
-        }, 3000);
-      }
-    );
+  navigator.clipboard.writeText(`${location.origin}/#${cid.string}`).then(
+    function() {
+      console.log("Copied!");
+      document.getElementById("savebtn").innerHTML = "Copied to clipboard!";
+      setTimeout(function() {
+        document.getElementById("savebtn").innerHTML = "Save Draft";
+      }, 3000);
+    },
+    function() {
+      console.error("Failed to copy");
+      document.getElementById("savebtn").innerHTML = "Failed to copy!";
+      setTimeout(function() {
+        document.getElementById("savebtn").innerHTML = "Save Draft";
+      }, 3000);
+    }
+  );
 }
 async function downloadHTML() {
   window.download(
