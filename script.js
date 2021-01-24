@@ -1236,9 +1236,26 @@ async function copy() {
       }
     );
 }
-async function preview() {
-  const { cid } = await window.node.add(await generate());
-  window.open(`https://gateway.ipfs.io/ipfs/${cid.string}`);
+async function saveDraft() {
+  const { cid } = await window.node.add(JSON.stringify(quill.getContents()));
+  navigator.clipboard
+    .writeText(`${location.origin}/#${cid.string}`)
+    .then(
+      function() {
+        console.log("Copied!");
+        document.getElementById("savebtn").innerHTML = "Copied to clipboard!";
+        setTimeout(function() {
+          document.getElementById("savebtn").innerHTML = "Save Draft";
+        }, 3000);
+      },
+      function() {
+        console.error("Failed to copy");
+        document.getElementById("savebtn").innerHTML = "Failed to copy!";
+        setTimeout(function() {
+          document.getElementById("savebtn").innerHTML = "Save Draft";
+        }, 3000);
+      }
+    );
 }
 async function downloadHTML() {
   window.download(
