@@ -1207,12 +1207,15 @@ async function generate() {
   var css = await promise.text();
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
+  var icon = document.querySelector("#emojipicker").value;
   var output = ejs.render(template, {
     css: css,
     html: quillhtml,
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
-    icon: document.querySelector("#emojipicker").value
+    icon: document.querySelector("#emojipicker").value.startsWith("Choose")
+      ? "🚀"
+      : icon
   });
   output = minify(output, {
     useShortDoctype: true,
