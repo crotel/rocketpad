@@ -1,6 +1,5 @@
 # 🚀 rocketpad
-___
-https://file.coffee/u/TvdMzMruzr.mp4
+![demo of rocketpad](https://ur.red-panda.red/DVt6eQBgA.gif)
 
 
 This is RocketPad. RocketPad allows you to create notes/mini-essays/ using quill's WYSIWYG editor and blast them into space using InterPlanetary File System (IPFS). No setup required™
