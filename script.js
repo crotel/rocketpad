@@ -1200,6 +1200,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 async function generate() {
+  const getBase64FromUrl = async (url) => {
+  const data = await fetch(url);
+  const blob = await data.blob();
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(blob); 
+    reader.onloadend = function() {
+      const base64data = reader.result;   
+      resolve(base64data);
+    }
+  });
+}
   var startTime = new Date().valueOf();
   var promise = await fetch("./template.ejs");
   var template = await promise.text();
@@ -1207,14 +1219,14 @@ async function generate() {
   var css = await promise.text();
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
-  var icon = document.querySelector("#emojipicker").value;
+  var icon = await getBase64FromUrl(`http://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent}?style=microsoft`);
   var output = ejs.render(template, {
     css: css,
     html: quillhtml,
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
     icon: document.querySelector("#emojipicker").value.startsWith("Choose")
-      ? "🚀"
+      ? await getBase64FromUrl(`http://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent("ro")}?style=microsoft`)
       : icon
   });
   output = minify(output, {
