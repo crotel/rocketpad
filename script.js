@@ -1231,7 +1231,7 @@ async function generate() {
     description: document.querySelector("#description").value,
     icon: document.querySelector("#emojipicker").value.startsWith("Choose")
       ? await getBase64FromUrl(
-          `https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent(
+          `https://cors-anywhere.herokuapp.com/https://emojicdn.elk.sh/${encodeURIComponent(
             "🚀"
           )}?style=microsoft`
         )
