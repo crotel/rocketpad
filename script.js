@@ -1244,9 +1244,9 @@ async function generate() {
     minifyJS: true,
     minifyCSS: true
   });
-  var end = (new Date().valueOf() - startTime) / 1000;
-  return `<!-- 🚀 Generated in ${end} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
-${output}<script>console.log(::)</script>`;
+  return `<!-- 🚀 Generated in ${(new Date().valueOf() - startTime) /
+    1000} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
+${output}`;
 }
 async function copy() {
   const { cid } = await window.node.add(await generate());
@@ -1310,7 +1310,7 @@ function load() {
           { attributes: { bold: true }, insert: "rocketpad" },
           {
             insert:
-              ", a webapp that allows you to create mini essays/websites and publish them to the distributed web via IPFS. It uses Quill.js as the editor due to its portability and its ability to work 100% offline. It saves your documents using IPFS. Here's a quick demo showing what you can use in your documents:\n\nQuotes"
+              ", a web app that allows you to create mini-essays/websites and publish them to the distributed web via IPFS. It uses Quill.js as the editor due to its portability and its ability to work 100% offline. It saves your documents using IPFS. Here's a quick demo showing what you can use in your documents:\n\nQuotes"
           },
           { attributes: { blockquote: true }, insert: "\n" },
           { insert: "headers" },
@@ -1324,8 +1324,36 @@ function load() {
           { attributes: { background: "#ffff00" }, insert: "highlighting" },
           {
             insert:
-              '?\n\nFun Fact: You can use markdown!\n\nWhen you are done with a document, make sure to click "Copy Link" to copy the link of your article.\n'
-          }
+              '?\n\nFun Fact: You can use markdown!\n\nWhen you are done with a document, make sure to click "Copy Link" to copy the link of your article.\n\n'
+          },
+          {
+            attributes: {
+              color: "var(--tertiary)",
+              background: "#ffffff",
+              link:
+                "https://twitter.com/UpscaleDavid/status/1357862556845690882"
+            },
+            insert: "Twitter"
+          },
+          { attributes: { color: "#222222" }, insert: " | " },
+          {
+            attributes: {
+              color: "var(--tertiary)",
+              background: "#ffffff",
+              link: "https://github.com/aboutDavid/rocketpad"
+            },
+            insert: "Github"
+          },
+          { attributes: { color: "#222222" }, insert: " | " },
+          {
+            attributes: {
+              color: "var(--tertiary)",
+              background: "#ffffff",
+              link: "https://glitch.com/edit/#!/rocketpad"
+            },
+            insert: "Glitch"
+          },
+          { insert: "\n" }
         ]
       });
     }
