@@ -1200,18 +1200,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 async function generate() {
-  const getBase64FromUrl = async (url) => {
-  const data = await fetch(url);
-  const blob = await data.blob();
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(blob); 
-    reader.onloadend = function() {
-      const base64data = reader.result;   
-      resolve(base64data);
-    }
-  });
-}
+  const getBase64FromUrl = async url => {
+    const data = await fetch(url);
+    const blob = await data.blob();
+    return new Promise(resolve => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = function() {
+        const base64data = reader.result;
+        resolve(base64data);
+      };
+    });
+  };
   var startTime = new Date().valueOf();
   var promise = await fetch("./template.ejs");
   var template = await promise.text();
@@ -1219,14 +1219,22 @@ async function generate() {
   var css = await promise.text();
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
-  var icon = await getBase64FromUrl(`https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent(document.querySelector("#emojipicker").value)}?style=microsoft`);
+  var icon = await getBase64FromUrl(
+    `https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent(
+      document.querySelector("#emojipicker").value
+    )}?style=microsoft`
+  );
   var output = ejs.render(template, {
     css: css,
     html: quillhtml,
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
     icon: document.querySelector("#emojipicker").value.startsWith("Choose")
-      ? await getBase64FromUrl(`https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent("🚀")}?style=microsoft`)
+      ? await getBase64FromUrl(
+          `https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent(
+            "🚀"
+          )}?style=microsoft`
+        )
       : icon
   });
   output = minify(output, {
@@ -1236,9 +1244,9 @@ async function generate() {
     minifyJS: true,
     minifyCSS: true
   });
-  return `<!-- 🚀 Generated in ${(new Date().valueOf() - startTime) /
-    1000} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
-${output}`;
+  var end = (new Date().valueOf() - startTime) / 1000;
+  return `<!-- 🚀 Generated in ${end} seconds by RocketPad (https://rocketpad.glitch.me) | View it on GitHub at https://github.com/aboutDavid/rocketpad -->
+${output}<script>console.log(::)</script>`;
 }
 async function copy() {
   const { cid } = await window.node.add(await generate());
