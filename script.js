@@ -1219,14 +1219,14 @@ async function generate() {
   var css = await promise.text();
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
-  var icon = await getBase64FromUrl(`http://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent}?style=microsoft`);
+  var icon = await getBase64FromUrl(`https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent(document.querySelector("#emojipicker").value)}?style=microsoft`);
   var output = ejs.render(template, {
     css: css,
     html: quillhtml,
     title: document.querySelector("#title").value,
     description: document.querySelector("#description").value,
     icon: document.querySelector("#emojipicker").value.startsWith("Choose")
-      ? await getBase64FromUrl(`http://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent("ro")}?style=microsoft`)
+      ? await getBase64FromUrl(`https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent("🚀")}?style=microsoft`)
       : icon
   });
   output = minify(output, {
