@@ -1,20 +1,30 @@
 # 🚀 rocketpad
+___
+https://file.coffee/u/TvdMzMruzr.mp4
 
+
+This is RocketPad. RocketPad allows you to create notes/mini-essays/ using quill's WYSIWYG editor and blast them into space using InterPlanetary File System (IPFS). No setup required™
 ### What is this?
 A webapp which allows you to create mini essays/websites and publish them to the distributed web via IPFS.
 
 ### Why did I make it?
-1. I needed something to write/publish documents to IPFS
-2. I thought I would make something for the [Hashnode + Vercel Hackathon](https://townhall.hashnode.com/announcing-hashnode-hackathon-powered-by-vercel)
+I needed something to write/publish documents to IPFS and I was just bord I guess `¯\_(ツ)_/¯`
 
-### Installation
+### Features:
+Works offline: Your rendered documents/mini-essays work offline because all icons/images are stored offline
 
-**Publicly:**
+### How to use it
+1. [Visit the site](https://rocketpad.glitch.me) ([or via your local IPFS gateway](http://localhost/ipns/rocketpad.aboutdavid.me))
+2. Write something. Markdown **is** supported!
+3. Set a title, description, and icon (all are optional)
+4. Click "Create". You have copied your document to the clipboard! Share it with your friends!
 
-You can view this at [rocketpad.vercel.app](https://rocketpad.vercel.app) or [rocketpad.now.sh](https://rocketpad.now.sh) or [rocketpad.aboutdavid.me](https://rocketpad.aboutdavid.me)
+### Buttons
+- Create: Renders/copies your essay to clipboard
+- Save Draft: Copies an edit link to your clipboard.
+- Download: The same thing as the create button, but it downloads instead of uploads.
 
-
-**On your own daemon:**
+### Use on your own daemon:
 ```bash
 ipfs pin add /ipns/rocketpad.aboutdavid.me
 ```
@@ -26,4 +36,9 @@ pinned QmUvxeH81GVxHP4yBmK6YCc3aNFAXC5i1yKZx5ibgHbHaB recursively
 
 Take that hash (the thing that looks like `QmUvxeH81GVxHP4yBmK6YCc3aNFAXC5i1yKZx5ibgHbHaB`) and visit `http://localhost:8080/ipfs/[OUTPUT HASH]`
 
-Now you can use RocketPad offline. Make sure to use the [IPFS Companion](https://chrome.google.com/webstore/detail/ipfs-companion/nibjojkomfdiaoajekhjakgkdhaomnch) chrome extension for the best experience!
+### Thanks
+- @benborgers for his [emoji cdn](https://emojicdn.elk.sh/)
+- Stackoverflow for allowing me to allow me to borrow their code (if the code police come, tell them i'm not here!)
+- IPFS for creating a better web
+
+[Twitter](https://twitter.com/UpscaleDavid/status/1357862556845690882) | [Github](https://github.com/aboutDavid/rocketpad) | [Glitch](https://glitch.com/edit/#!/rocketpad)
