@@ -1220,7 +1220,7 @@ async function generate() {
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
   var icon = await getBase64FromUrl(
-    `https://cors-anywhere.herokuapp.com/emojicdn.elk.sh/${encodeURIComponent(
+    `https://cors-anywhere.herokuapp.com/https://emojicdn.elk.sh/${encodeURIComponent(
       document.querySelector("#emojipicker").value
     )}?style=microsoft`
   );
