@@ -1220,7 +1220,7 @@ async function generate() {
   var quillhtml = window.quill.container.firstChild.innerHTML;
   var ejs = window.ejs;
   var icon = await getBase64FromUrl(
-    `https://corsanywhereplus.herokuapp.com/https://emojicdn.elk.sh/${encodeURIComponent(
+    `https://emojicdn.elk.sh/${encodeURIComponent(
       document.querySelector("#emojipicker").value
     )}?style=microsoft`
   );
@@ -1231,7 +1231,7 @@ async function generate() {
     description: document.querySelector("#description").value,
     icon: document.querySelector("#emojipicker").value.startsWith("Choose")
       ? await getBase64FromUrl(
-          `https://corsanywhereplus.herokuapp.com/https://emojicdn.elk.sh/${encodeURIComponent(
+          `https://emojicdn.elk.sh/${encodeURIComponent(
             "🚀"
           )}?style=microsoft`
         )
